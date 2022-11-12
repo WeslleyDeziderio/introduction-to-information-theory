@@ -1,7 +1,12 @@
 #include <iostream>
+#include <stdio.h>
 
 #include "./src/encoder.cpp"
 #include "./src/decoder.cpp"
+
+void mostraUso () {
+    
+}
 
 int main(int argc, char *argv[]) {
 
