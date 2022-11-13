@@ -4,3 +4,7 @@
 Decoder::Decoder() {
 
 }
+
+void descomprimeArquivo() {
+    
+}
