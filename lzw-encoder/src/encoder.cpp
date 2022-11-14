@@ -47,7 +47,6 @@ void Encoder::printHello() {
  * @param tamanho será o nosso 2^k
  * @return std::vector<char> 
  */
-
 void getDicCode(std::uint16_t tamanho) {
     std::unordered_map<std::string, int> tabela;
 
@@ -64,17 +63,10 @@ void getDicCode(std::uint16_t tamanho) {
 }
 
 /**
- * @brief método responsável por realizar a compressão de multmídia
+ * @brief método responsável por realizar a compressão multmídia
  * 
  */
 std::vector<int> comprimeArquivo() {
-    // std::ifstream myFile("./files/corpus16MB.txt", std::ios_base::in | std::ios_base::ate | std::ios_base::binary);
-    // if (!myFile.is_open()) {
-    //     std::cerr << "Falha ao abrir o arquivo!" << std::endl;
-    // } else {
-    //     std::cout << myFile.rdbuf(); // mostra texto do arquivo
-    // }
-
     FILE *fp;
     fp = fopen("corpus16MB.txt", "rb");
 
@@ -90,13 +82,13 @@ std::vector<int> comprimeArquivo() {
     std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
 
     getDicCode(std::pow(2, 8));
+    auto start = std::chrono::high_resolution_clock::now();
     std::cout << "Comprimindo o arquivo... " << std::endl;
 
     ch = fgetc(fp);
     std::string seccion = "";
 
     while(ch != EOF) {
-               
         for(int i = 0 ; i < 100 ; i++){
             ch = fgetc(fp);
             seccion += ch;
@@ -106,10 +98,13 @@ std::vector<int> comprimeArquivo() {
     }
 
     return mensagemCodificada;
-    // auto start = std::chrono::high_resolution_clock::now();
 
     std::cout << "Arquivo comprimido com sucesso!" << std::endl;
-
     fclose(fp);
-    // auto stop = std::chrono::high_resolution_clock::now();
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duracao = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+    std::cout << "Tempo de execução em ms: " << duracao.count() << std::endl;
+
+    
 }  
