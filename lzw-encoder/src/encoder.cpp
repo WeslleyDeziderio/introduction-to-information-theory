@@ -10,7 +10,7 @@
 #include <unordered_map>
 
 
-int tamanhoLimite;
+long unsigned int tamanhoLimite;
 using tipoCodigo = std::uint16_t;
 namespace globais {
     int k;
@@ -69,10 +69,10 @@ std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
  */
 std::vector<int> comprimeArquivo() {
     FILE *fp;
-    fp = fopen("corpus16MB.txt", "rb");
+    fp = fopen("corpus2linhas.txt", "rb");
 
     if (fp == NULL) {
-        std::cerr << "Erro abrindo o arquivo " << fp << std::endl;
+        std::cerr << "Erro abrindo o arquivo!" << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -93,7 +93,7 @@ std::vector<int> comprimeArquivo() {
     std::string seccion = "";
 
     while(ch != EOF) {
-        for(int i = 0 ; i < 100 ; i++){
+        for(int i = 0 ; i < 1000 ; i++){
             if(ch == EOF){
                 seccion[i-1] = '\0';
                 break;
@@ -102,17 +102,15 @@ std::vector<int> comprimeArquivo() {
             ch = fgetc(fp);
         }
 
-        for(int i = 0; i < (seccion.length() -1) ; i++){
-        
-            if( i != (seccion.length() - 1)){
+        for (long unsigned int i = 0; i < (seccion.length() -1); i++){
+            if (i != (seccion.length() - 1)) {
                 caractereAtual += seccion[i+1];
             }
             std::string compare = caractereAnterior + caractereAtual;
-            if( dictionary.find(compare) != dictionary.end() ){
+            if (dictionary.find(compare) != dictionary.end()){
 
                 caractereAnterior = caractereAnterior + caractereAtual;
-            }else{
-
+            } else{
                 mensagemCodificada.push_back(dictionary[caractereAnterior]);
                 if(dictionary.size() <= tamanhoLimite){
                     dictionary[compare] = code;
@@ -122,18 +120,18 @@ std::vector<int> comprimeArquivo() {
 
             }
             caractereAtual = "";
-  
         }
+        
         seccion = "";
     }
-    // if(dictionary.find(caractereAnterior) != dictionary.end()){
-    //     mensagemCodificada.push_back(dictionary[caractereAnterior]);
-    // }
+    if(dictionary.find(caractereAnterior) != dictionary.end()){
+        mensagemCodificada.push_back(dictionary[caractereAnterior]);
+    }
 
 
-    FILE *exit_file = fopen("mensagem_codificada.bin", "wb");
+    FILE *exit_file = fopen("mensagem_codificada_2linhas.bin", "wb");
 
-    for(int i = 0; i < mensagemCodificada.size(); i++){
+    for (long unsigned int i = 0; i < mensagemCodificada.size(); i++) {
         fwrite(&mensagemCodificada[i], 1, 1,exit_file);
 
     }

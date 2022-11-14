@@ -45,7 +45,13 @@ void decoding(vector<int> op)
 		ch += char(i);
 		table[i] = ch;
 	}
-	int old = op[0], n;
+
+
+
+
+	
+	int old = op[0];
+	int n;
 	string s = table[old];
 	string c = "";
 	c += s[0];

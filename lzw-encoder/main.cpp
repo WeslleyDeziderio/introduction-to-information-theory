@@ -1,8 +1,8 @@
 /**
  * @file main.cpp
- * @author Weslley Dezidério e Nathan Rodrigues (you@domain.com)
+ * @author Weslley Dezidério e Nathan Rodrigues
  * @brief 
- * @version 0.1
+ * @version 0.4
  * @date 2022-11-13
  * 
  * @copyright Copyright (c) 2022
@@ -29,7 +29,9 @@ int main(int argc, char *argv[]) {
     
     Encoder encoder;
     encoder.printHello();
-    comprimeArquivo();
+
+    std::vector<int> saidaComprimeArquivo = comprimeArquivo();
+    descomprimeArquivo(saidaComprimeArquivo);
 
     return 0;
 }

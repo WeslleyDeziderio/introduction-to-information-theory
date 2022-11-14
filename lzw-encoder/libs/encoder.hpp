@@ -6,7 +6,6 @@
 class Encoder {
 public:
     void printHello();
-    // void coder(std::istream &in, std::ostream &out);s
 };
 
 #endif
