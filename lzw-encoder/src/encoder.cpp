@@ -13,6 +13,8 @@
 #include <chrono>
 #include <unordered_map>
 
+
+int tamanhoLimite;
 using tipoCodigo = std::uint16_t;
 namespace globais {
     int k;
@@ -33,7 +35,8 @@ void Encoder::printHello() {
     }
 
     long int tamanhoMaximo = std::pow(2, globais::k);
-
+    
+    tamanhoLimite = tamanhoMaximo;
     std::cout << "k = " << globais::k << std::endl;
     std::cout << "{2^k}: " << tamanhoMaximo << std::endl;
 
@@ -99,7 +102,6 @@ std::vector<int> comprimeArquivo() {
     std::string caractereAtual = "";
     std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
 
-    getDicCode(std::pow(2, 8));
     auto start = std::chrono::high_resolution_clock::now();
     std::cout << "Comprimindo o arquivo... " << std::endl;
 
@@ -130,8 +132,10 @@ std::vector<int> comprimeArquivo() {
                 // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
                 // << caractereAnterior + caractereAtual << "\t" << std::endl;
                 mensagemCodificada.push_back(dictionary[caractereAnterior]);
-                dictionary[compare] = code;
-                code++;
+                if(dictionary.size() <= tamanhoLimite){
+                    dictionary[compare] = code;
+                    code++;
+                }
                 caractereAnterior = caractereAtual;
 
             }
@@ -141,9 +145,9 @@ std::vector<int> comprimeArquivo() {
         seccion = "";
     }
     //mensagemCodificada.push_back(dictionary[caractereAnterior]);
+    //std::cout << (dictionary.size()-1) << std::endl;
 
-
-    FILE *exit_file = fopen("mensagem_codificada.txt", "a");
+    FILE *exit_file = fopen("mensagem_codificada.txt", "wb");
 
     for(int i = 0; i < mensagemCodificada.size(); i++){
         fprintf(exit_file,"%d",mensagemCodificada[i]);
@@ -157,4 +161,4 @@ std::vector<int> comprimeArquivo() {
     fclose(fp);
     return mensagemCodificada;
     // auto stop = std::chrono::high_resolution_clock::now();
-}  
+}
