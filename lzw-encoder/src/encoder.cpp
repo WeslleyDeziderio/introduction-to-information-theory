@@ -76,7 +76,7 @@ std::vector<int> comprimeArquivo() {
     // }
 
     FILE *fp;
-    fp = fopen("./files/corpus16MB.txt", "rb");
+    fp = fopen("corpus16MB.txt", "rb");
 
     if (fp == NULL) {
         std::cerr << "Erro abrindo o arquivo " << fp << std::endl;
@@ -93,9 +93,16 @@ std::vector<int> comprimeArquivo() {
     std::cout << "Comprimindo o arquivo... " << std::endl;
 
     ch = fgetc(fp);
+    std::string seccion = "";
+
     while(ch != EOF) {
-        printf("%s", ch);
-        ch = fgetc(fp);
+               
+        for(int i = 0 ; i < 100 ; i++){
+            ch = fgetc(fp);
+            seccion += ch;
+        }
+        std::cout << seccion << std::endl;
+        seccion = "";
     }
 
     return mensagemCodificada;
