@@ -90,7 +90,7 @@ std::vector<int> comprimeArquivo() {
     // }
 
     FILE *fp;
-    fp = fopen("banana.txt", "rb");
+    fp = fopen("corpus16MB.txt", "rb");
 
     if (fp == NULL) {
         std::cerr << "Erro abrindo o arquivo " << fp << std::endl;
@@ -110,8 +110,9 @@ std::vector<int> comprimeArquivo() {
     std::cout << "Comprimindo o arquivo... " << std::endl;
 
     ch = fgetc(fp);
+    caractereAnterior += ch;
     std::string seccion = "";
-    int flag = 0;
+
     while(ch != EOF) {
                
         for(int i = 0 ; i < 100 ; i++){
@@ -123,9 +124,9 @@ std::vector<int> comprimeArquivo() {
             ch = fgetc(fp);
         }
 
-        for(int i = 0; i < (seccion.size()- 1) ; i++){
+        for(int i = 0; i < (seccion.length() -1) ; i++){
         
-            if( i != (seccion.size() - 1)){
+            if( i != (seccion.length() - 1)){
                 caractereAtual += seccion[i+1];
             }
             std::string compare = caractereAnterior + caractereAtual;
@@ -133,6 +134,8 @@ std::vector<int> comprimeArquivo() {
 
                 caractereAnterior = caractereAnterior + caractereAtual;
             }else{
+                // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
+                // << caractereAnterior + caractereAtual << "\t" << std::endl;
                 mensagemCodificada.push_back(dictionary[caractereAnterior]);
                 dictionary[compare] = code;
                 code++;
@@ -144,16 +147,21 @@ std::vector<int> comprimeArquivo() {
         }
         seccion = "";
     }
-    mensagemCodificada.push_back(dictionary[caractereAnterior]);
+    //mensagemCodificada.push_back(dictionary[caractereAnterior]);
+
+
+    FILE *exit_file = fopen("mensagem_codificada.txt", "a");
 
     for(int i = 0; i < mensagemCodificada.size(); i++){
-        std::cout << mensagemCodificada[i];
+        fprintf(exit_file,"%d",mensagemCodificada[i]);
     }
-    return mensagemCodificada;
+    printf("\n");
+    fclose(exit_file);
+    std::cout << "Arquivo comprimido com sucesso!" << std::endl;
     // auto start = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Arquivo comprimido com sucesso!" << std::endl;
 
     fclose(fp);
+    return mensagemCodificada;
     // auto stop = std::chrono::high_resolution_clock::now();
 }  
