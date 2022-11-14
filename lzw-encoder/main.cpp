@@ -18,7 +18,6 @@ int main(int argc, char *argv[]) {
 
     Encoder enc;
     enc.printHello();
-
     comprimeArquivo();
 
     return 0;
