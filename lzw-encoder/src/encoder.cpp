@@ -1,10 +1,6 @@
 #include "../libs/encoder.hpp"
 
-#include <istream>
 #include <cstdlib>
-#include <ostream>
-#include <fstream>
-#include <list>
 #include <string>
 #include <vector>
 #include <limits>
@@ -66,19 +62,6 @@ std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
     return tabela;
 }
 
-// int compareDictionary(std::unordered_map<std::string, int> dicionario, std::string current){
-
-// 	for( int i = 0; i < dicionario.size(); i++){
-		
-//         if( current.size() == dicionario[i].size()){
-//             if( ( current.compare(dicionario[i]) ) == 0 ){
-                
-//                 return i;
-//             }
-// 	    }
-//     }
-// 	return 0;
-// }
 
 /**
  * @brief método responsável por realizar a compressão multmídia
@@ -129,8 +112,7 @@ std::vector<int> comprimeArquivo() {
 
                 caractereAnterior = caractereAnterior + caractereAtual;
             }else{
-                // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
-                // << caractereAnterior + caractereAtual << "\t" << std::endl;
+
                 mensagemCodificada.push_back(dictionary[caractereAnterior]);
                 if(dictionary.size() <= tamanhoLimite){
                     dictionary[compare] = code;
@@ -144,19 +126,21 @@ std::vector<int> comprimeArquivo() {
         }
         seccion = "";
     }
-    //mensagemCodificada.push_back(dictionary[caractereAnterior]);
-    //std::cout << (dictionary.size()-1) << std::endl;
+    // if(dictionary.find(caractereAnterior) != dictionary.end()){
+    //     mensagemCodificada.push_back(dictionary[caractereAnterior]);
+    // }
 
-    FILE *exit_file = fopen("mensagem_codificada.txt", "wb");
+
+    FILE *exit_file = fopen("mensagem_codificada.bin", "wb");
 
     for(int i = 0; i < mensagemCodificada.size(); i++){
-        fprintf(exit_file,"%d",mensagemCodificada[i]);
+        fwrite(&mensagemCodificada[i], 1, 1,exit_file);
+
     }
     fclose(exit_file);
     printf("\n");
     std::cout << "Arquivo comprimido com sucesso!" << std::endl;
     // auto start = std::chrono::high_resolution_clock::now();
-
 
     fclose(fp);
     return mensagemCodificada;
