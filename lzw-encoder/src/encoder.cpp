@@ -48,7 +48,7 @@ void Encoder::printHello() {
  * @return std::vector<char> 
  */
 
-void getDicCode(std::uint16_t tamanho) {
+std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
     std::unordered_map<std::string, int> tabela;
 
     for (int i = 0; i < tamanho; i++) {
@@ -60,8 +60,22 @@ void getDicCode(std::uint16_t tamanho) {
         // }
     }
 
-    return;
+    return tabela;
 }
+
+// int compareDictionary(std::unordered_map<std::string, int> dicionario, std::string current){
+
+// 	for( int i = 0; i < dicionario.size(); i++){
+		
+//         if( current.size() == dicionario[i].size()){
+//             if( ( current.compare(dicionario[i]) ) == 0 ){
+                
+//                 return i;
+//             }
+// 	    }
+//     }
+// 	return 0;
+// }
 
 /**
  * @brief método responsável por realizar a compressão de multmídia
@@ -76,12 +90,15 @@ std::vector<int> comprimeArquivo() {
     // }
 
     FILE *fp;
-    fp = fopen("corpus16MB.txt", "rb");
+    fp = fopen("banana.txt", "rb");
 
     if (fp == NULL) {
         std::cerr << "Erro abrindo o arquivo " << fp << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    int code = 256;
+    std::unordered_map<std::string, int> dictionary = getDicCode(code);
 
     char ch;
     std::vector<int> mensagemCodificada;
@@ -94,17 +111,44 @@ std::vector<int> comprimeArquivo() {
 
     ch = fgetc(fp);
     std::string seccion = "";
-
+    int flag = 0;
     while(ch != EOF) {
                
         for(int i = 0 ; i < 100 ; i++){
+            if(ch == EOF){
+                seccion[i-1] = '\0';
+                break;
+            }
+            seccion = seccion + ch;
             ch = fgetc(fp);
-            seccion += ch;
         }
-        std::cout << seccion << std::endl;
+
+        for(int i = 0; i < (seccion.size()- 1) ; i++){
+        
+            if( i != (seccion.size() - 1)){
+                caractereAtual += seccion[i+1];
+            }
+            std::string compare = caractereAnterior + caractereAtual;
+            if( dictionary.find(compare) != dictionary.end() ){
+
+                caractereAnterior = caractereAnterior + caractereAtual;
+            }else{
+                mensagemCodificada.push_back(dictionary[caractereAnterior]);
+                dictionary[compare] = code;
+                code++;
+                caractereAnterior = caractereAtual;
+
+            }
+            caractereAtual = "";
+  
+        }
         seccion = "";
     }
+    mensagemCodificada.push_back(dictionary[caractereAnterior]);
 
+    for(int i = 0; i < mensagemCodificada.size(); i++){
+        std::cout << mensagemCodificada[i];
+    }
     return mensagemCodificada;
     // auto start = std::chrono::high_resolution_clock::now();
 
