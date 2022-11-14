@@ -1,1 +1,1 @@
-<h1>Introduction to Information Theory - LZW compressor<\h1>
+<h1>Introduction to Information Theory - LZW compressor</h1>
