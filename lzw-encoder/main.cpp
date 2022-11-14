@@ -1,3 +1,14 @@
+/**
+ * @file main.cpp
+ * @author Weslley Dezidério e Nathan Rodrigues (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-11-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include <iostream>
 #include <stdio.h>
 
@@ -5,8 +16,8 @@
 #include "./src/decoder.cpp"
 
 void mostraUso() {
-    std::cerr << "./main <nome_do_arquivo.extensao_do_arquivo> <nome_do_arquivo.lzw>" << std::endl;
-    std::cerr << "./main <nome_do_arquivo.lzw> <nome_do_arquivo.extensao_do_arquivo>" << std::endl;
+    std::cerr << "Compressão: g++ main.cpp -o main && ./main <nome_do_arquivo.extensao_do_arquivo>" << std::endl;
+    std::cerr << "Descompressão: g++ main.cpp -o main && ./main <nome_do_arquivo.lzw>" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -15,9 +26,9 @@ int main(int argc, char *argv[]) {
     //     std::cout << "Veja modo de uso abaixo...\n \n" << std::endl;
     //     mostraUso();
     // }
-
-    Encoder enc;
-    enc.printHello();
+    
+    Encoder encoder;
+    encoder.printHello();
     comprimeArquivo();
 
     return 0;
