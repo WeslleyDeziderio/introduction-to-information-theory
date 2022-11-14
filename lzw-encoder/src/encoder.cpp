@@ -94,7 +94,7 @@ std::vector<int> comprimeArquivo() {
 
     ch = fgetc(fp);
     while(ch != EOF) {
-        printf("%c", ch);
+        printf("%s", ch);
         ch = fgetc(fp);
     }
 
