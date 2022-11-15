@@ -131,7 +131,6 @@ std::vector<int> comprimeArquivo() {
 
     for (long unsigned int i = 0; i < mensagemCodificada.size(); i++) {
         fwrite(&mensagemCodificada[i], 1, 1,exit_file);
-
     }
 
     fclose(exit_file);

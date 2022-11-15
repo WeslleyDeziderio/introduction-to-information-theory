@@ -1,10 +1,12 @@
 #include "../libs/decoder.hpp"
 
+#include <iostream>
 #include <stdlib.h>
 #include <fstream>
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <chrono>
 
 Decoder::Decoder() {
 
