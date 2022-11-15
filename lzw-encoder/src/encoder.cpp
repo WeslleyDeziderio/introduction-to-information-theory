@@ -8,7 +8,7 @@
 #include <sstream>
 #include <chrono>
 #include <unordered_map>
-
+#include <fstream>
 
 long unsigned int tamanhoLimite;
 using tipoCodigo = std::uint16_t;
