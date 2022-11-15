@@ -37,14 +37,11 @@ std::unordered_map<int, std::string> getDicDecode(std::uint16_t tamanho) {
  * @param arquivoComprimido resultado da chamada do método comprimeArquivo
  */
 void descomprimeArquivo(std::vector<int> arquivoComprimido) {
-    // FILE *fp;
-    // fp = fopen("./mensagem_decodificada.txt", "w");
-
     std::ofstream myfile;
-    myfile.open ("./mensagem_decodificada_2linhas.txt");
+    myfile.open ("./mensagem_decodificada.txt");
 
     std::cout << "\nDescomprimindo arquivo..." << std::endl;
-
+    auto start = std::chrono::high_resolution_clock::now();
     int tamanhoReferencia = 256;
     std::unordered_map<int, std::string> dicionario = getDicDecode(tamanhoReferencia);
 
@@ -54,7 +51,7 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
     std::string traducaoCaractereAnterior = "";
     traducaoCaractereAnterior += msgDecodificada[0];
 
-    //std::cout << msgDecodificada;
+    myfile << msgDecodificada;
 
     for (long unsigned int i = 0; i < arquivoComprimido.size()-1; i++) {
         proximoCaractere = arquivoComprimido[i+1];
@@ -76,10 +73,13 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
 
         myfile << msgDecodificada;
 
-        // fprintf(fp, "%s", msgDecodificada);
     }
     
-    std::cout << "Arquivo descomprimido com sucesso" << std::endl;
+    std::cout << "Arquivo descomprimido com sucesso!" << std::endl;
     myfile.close();
-    // fclose(fp);
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+
+    std::cout << "Duração da descompressão: " << duration.count() << " milisegundos" << std::endl;
 }

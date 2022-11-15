@@ -77,7 +77,8 @@ void decoding(vector<int> op)
 int main()
 {
 
-	string s = "WYS*WYGWYS*WYSWYSG";
+	string s = "Carlos considerou Ega com espanto. Para que? Para arrastar os passos tristes desde o Gremio at� � Casa Havaneza? N�o! Paris era o unico logar da terra congenere com o typo definitivo em que elle se fix�ra: - �o homem rico que vive bem�. Passeio a cavallo no Bois; alm��o no Bignon; uma volta pelo boulevard; uma hora no club com os jornaes; um bocado de florete na sala d'armas; � noite a Com�die Fran�aise ou uma soir�e; Trouville no ver�o, alguns tiros �s lebres no inverno; e atrav�s do anno as mulheres, as corridas, certo interesse pela sciencia, o bric-�-brac, e uma pouca de blague. Nada mais inoffensivo, mais nullo, e mais agradavel.";
+
 	vector<int> output_code = encoding(s);
 	cout << "Output Codes are: ";
 	for (long unsigned int i = 0; i < output_code.size(); i++) {

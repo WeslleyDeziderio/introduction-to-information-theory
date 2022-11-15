@@ -69,7 +69,7 @@ std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
  */
 std::vector<int> comprimeArquivo() {
     FILE *fp;
-    fp = fopen("corpus2linhas.txt", "rb");
+    fp = fopen("corpus16MB.txt", "rb");
 
     if (fp == NULL) {
         std::cerr << "Erro abrindo o arquivo!" << std::endl;
@@ -83,64 +83,66 @@ std::vector<int> comprimeArquivo() {
     std::vector<int> mensagemCodificada;
     std::string caractereAnterior = "";
     std::string caractereAtual = "";
-    std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
+    // std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
+
+    std::cout << "\nComprimindo o arquivo... " << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();
-    std::cout << "Comprimindo o arquivo... " << std::endl;
 
     ch = fgetc(fp);
     caractereAnterior += ch;
+    std::vector<char> aux;
     std::string seccion = "";
 
-    while(ch != EOF) {
-        for(int i = 0 ; i < 1000 ; i++){
-            if(ch == EOF){
-                seccion[i-1] = '\0';
-                break;
-            }
-            seccion = seccion + ch;
-            ch = fgetc(fp);
-        }
-
-        for (long unsigned int i = 0; i < (seccion.length() -1); i++){
-            if (i != (seccion.length() - 1)) {
-                caractereAtual += seccion[i+1];
-            }
-            std::string compare = caractereAnterior + caractereAtual;
-            if (dictionary.find(compare) != dictionary.end()){
-
-                caractereAnterior = caractereAnterior + caractereAtual;
-            } else{
-                mensagemCodificada.push_back(dictionary[caractereAnterior]);
-                if(dictionary.size() <= tamanhoLimite){
-                    dictionary[compare] = code;
-                    code++;
-                }
-                caractereAnterior = caractereAtual;
-
-            }
-            caractereAtual = "";
-        }
-        
-        seccion = "";
-    }
-    if(dictionary.find(caractereAnterior) != dictionary.end()){
-        mensagemCodificada.push_back(dictionary[caractereAnterior]);
+    while (ch != EOF) {
+        aux.push_back(ch);
+        ch = fgetc(fp);
     }
 
+    for(long unsigned int i = 0 ; i < aux.size() ; i++){
+        seccion += aux[i];
+    }
 
-    FILE *exit_file = fopen("mensagem_codificada_2linhas.bin", "wb");
+    for (long unsigned int i = 0; i < (seccion.length()-1); i++){
+        if (i != (seccion.length()-1)) {
+            caractereAtual += seccion[i+1];
+        }
+        std::string compare = caractereAnterior + caractereAtual;
+        if (dictionary.find(compare) != dictionary.end()){
+
+            caractereAnterior = caractereAnterior + caractereAtual;
+        } else{
+            // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
+            //  << compare << "\t" << code << std::endl;
+            mensagemCodificada.push_back(dictionary[caractereAnterior]);
+            if (dictionary.size() <= tamanhoLimite){
+                dictionary[compare] = code;
+                code++;
+            }
+            caractereAnterior = caractereAtual;
+
+        }
+        caractereAtual = "";
+    }
+
+    mensagemCodificada.push_back(dictionary[caractereAnterior]);
+
+    FILE *exit_file = fopen("mensagem_codificada.bin", "wb");
 
     for (long unsigned int i = 0; i < mensagemCodificada.size(); i++) {
         fwrite(&mensagemCodificada[i], 1, 1,exit_file);
 
     }
+
     fclose(exit_file);
     printf("\n");
     std::cout << "Arquivo comprimido com sucesso!" << std::endl;
-    // auto start = std::chrono::high_resolution_clock::now();
 
     fclose(fp);
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
+
+    std::cout << "Duração da compressão: " << duration.count() << " milisegundos." << std::endl;   
     return mensagemCodificada;
-    // auto stop = std::chrono::high_resolution_clock::now();
 }

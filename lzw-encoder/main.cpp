@@ -16,8 +16,8 @@
 #include "./src/decoder.cpp"
 
 void mostraUso() {
-    std::cerr << "Compressão: g++ main.cpp -o main && ./main <nome_do_arquivo.extensao_do_arquivo>" << std::endl;
-    std::cerr << "Descompressão: g++ main.cpp -o main && ./main <nome_do_arquivo.lzw>" << std::endl;
+    // std::cerr << "Compressão: g++ main.cpp -o main && ./main <nome_do_arquivo.extensao_do_arquivo>" << std::endl;
+    // std::cerr << "Descompressão: g++ main.cpp -o main && ./main <nome_do_arquivo.lzw>" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
