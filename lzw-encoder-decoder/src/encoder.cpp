@@ -18,7 +18,7 @@ namespace globais {
 }
 
 void Encoder::printHello() {
-    std::cout << "Compressor e descompressor  Lempel-Ziv-Welch.\n" << std::endl;
+    std::cout << "Compressor e descompressor Lempel-Ziv-Welch.\n" << std::endl;
     std::cout << "Tamanho máximo do dicionário: " << globais::tamanhoMaxDic << std::endl;
     std::cout << "Para valores cada vez maiores de 'k', o tempo de execução do programa irá aumentar!" << std::endl;
     std::cout << "Insira um valor para 'k' entre 9 e 16: ";
@@ -78,7 +78,8 @@ std::vector<int> comprimeArquivo() {
     std::string caractereAtual = "";
     std::string seccion = "";
 
-    std::ifstream myfile("disco.mp4", std::ios_base::in | std::ios_base::binary);
+    std::ifstream myfile("corpus16MB.txt", std::ios_base::in | std::ios_base::binary);
+    // std::ifstream myfile("disco.mp4", std::ios_base::in | std::ios_base::binary);
     myfile.seekg(0, myfile.end);
     std::streampos length = myfile.tellg();
     myfile.seekg(0, myfile.beg);
@@ -104,10 +105,10 @@ std::vector<int> comprimeArquivo() {
         if (dictionary.find(compare) != dictionary.end()){
             caractereAnterior = caractereAnterior + caractereAtual;
         } else {
-            // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
-            //  << compare << "\t" << code << std::endl;
             mensagemCodificada.push_back(dictionary[caractereAnterior]);
             if (dictionary.size() <= tamanhoLimite){
+                dicionarioFile << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
+                << compare << "\t" << code << "\n";
                 dictionary[compare] = code;
                 code++;
             }

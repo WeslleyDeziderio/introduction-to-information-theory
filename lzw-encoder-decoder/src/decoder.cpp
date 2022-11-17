@@ -40,7 +40,8 @@ std::unordered_map<int, std::string> getDicDecode(std::uint16_t tamanho) {
  */
 void descomprimeArquivo(std::vector<int> arquivoComprimido) {
     std::ofstream myfile;
-    myfile.open ("./mensagem_decodificada.mp4");
+    myfile.open("./mensagem_decodificada.txt");
+    // myfile.open ("./video_decodificado.mp4");
 
     std::cout << "\nDescomprimindo arquivo..." << std::endl;
     auto start = std::chrono::high_resolution_clock::now();

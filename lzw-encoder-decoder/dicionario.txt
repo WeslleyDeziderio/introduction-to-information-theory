@@ -1,0 +1,268 @@
+T	84		Te	256
+e	101		es	257
+s	115		st	258
+t	116		te	259
+e	101		e 	260
+ 	32		 c	261
+c	99		ca	262
+a	97		ar	263
+r	114		ra	264
+a	97		ac	265
+c	99		ct	266
+te	259		ter	267
+r	114		re	268
+es	257		es 	269
+ 	32		 e	270
+e	101		em	271
+m	109		m 	272
+ 	32		 s	273
+s	115		se	274
+e	101		eq	275
+q	113		qu	276
+u	117		ue	277
+e	101		en	278
+n	110		nc	279
+c	99		ci	280
+i	105		ia	281
+a	97		a 	282
+ 	32		 a	283
+a	97		aa	284
+aa	284		aaa	285
+aaa	285		aaaa	286
+aaa	285		aaa 	287
+ 	32		 b	288
+b	98		bb	289
+bb	289		bbb	290
+bbb	290		bbbb	291
+bb	289		bb 	292
+ a	283		 aa	293
+aaaa	286		aaaaa	294
+aaa 	287		aaa b	295
+bbbb	291		bbbbb	296
+bbbbb	296		bbbbb
+	297
+
+	10		
+a	298
+aa	284		aab	299
+b	98		ba	300
+a	97		ab	301
+ba	300		bab	302
+ba	300		baa	303
+aa	284		aa
+	304
+
+	10		
+A	305
+A	65		A 	306
+ 	32		 R	307
+R	82		RU	308
+U	85		UA	309
+A	65		A	310
+	13		
+	311
+
+	10		
+	312
+
+	311		
+E	313
+E	69		Eu	314
+u	117		u 	315
+ a	283		 am	316
+m	109		mo	317
+o	111		o 	318
+ a	283		 a 	319
+ 	32		 r	320
+r	114		ru	321
+u	117		ua	322
+a	97		a.	323
+.	46		. 	324
+ 	32		 E	325
+E	69		Es	326
+s	115		ss	327
+se	274		se 	328
+ s	273		 se	329
+en	278		ent	330
+t	116		ti	331
+i	105		im	332
+m	109		me	333
+ent	330		ento	334
+o 	318		o d	335
+d	100		de	336
+e 	260		e n	337
+n	110		na	338
+a	97		at	339
+t	116		tu	340
+u	117		ur	341
+re	268		rez	342
+z	122		za	343
+a 	282		a t	344
+t	116		to	345
+o	111		od	346
+d	100		da	347
+a 	282		a í	348
+í	237		ín	349
+n	110		nt	350
+ti	331		tim	351
+m	109		ma	352
+a 	282		a n	353
+n	110		nã	354
+ã	227		ão	355
+o 	318		o v	356
+v	118		vo	357
+o	111		os	358
+s	115		s 	359
+ se	329		 ser	360
+r	114		ri	361
+ia	281		ia 	362
+ r	320		 re	363
+e	101		ev	364
+v	118		ve	365
+e	101		el	366
+l	108		la	367
+a	97		ad	368
+d	100		do	369
+o 	318		o p	370
+p	112		po	371
+o	111		or	372
+r	114		r 	373
+ 	32		 m	374
+m	109		mi	375
+im	332		im 	376
+ se	329		 se 	377
+ 	32		 n	378
+nã	354		não	379
+o 	318		o j	380
+j	106		ju	381
+u	117		ul	382
+l	108		lg	383
+g	103		ga	384
+a	97		as	385
+ss	327		sse	386
+e	101		e,	387
+,	44		, 	388
+ e	270		 e 	389
+ r	320		 ra	390
+a	97		az	391
+z	122		zõ	392
+õ	245		õe	393
+es 	269		es n	394
+não	379		não 	395
+ 	32		 t	396
+ti	331		tiv	397
+ve	365		ves	398
+sse	386		sse 	399
+ 	32		 p	400
+p	112		pa	401
+ar	263		ara	402
+a 	282		a j	403
+ju	381		jul	404
+lg	383		lga	405
+ar	263		ar,	406
+, 	388		, q	407
+qu	276		que	408
+e 	260		e e	409
+es	257		est	410
+te	259		te 	411
+ am	316		 amo	412
+or	372		or 	413
+ a	283		 as	414
+ss	327		ssi	415
+im 	376		im a	416
+ab	301		abs	417
+s	115		so	418
+o	111		ol	419
+l	108		lu	420
+u	117		ut	421
+to	345		to 	422
+ e 	389		 e a	423
+as	385		ass	424
+s	115		si	425
+im 	376		im e	426
+e	101		ex	427
+x	120		xa	428
+a	97		ag	429
+g	103		ge	430
+e	101		er	431
+ra	264		rad	432
+do	369		do 	433
+ 	32		 é	434
+é	233		é 	435
+ p	400		 pa	436
+ar	263		art	437
+ti	331		til	438
+l	108		lh	439
+h	104		ha	440
+ad	368		ado	441
+o p	370		o po	442
+or 	413		or t	443
+to	345		tod	444
+do	369		dos	445
+s 	359		s v	446
+v	118		vó	447
+ó	243		ós	448
+s	115		s.	449
+. 	324		. N	450
+N	78		Nó	451
+ós	448		ós 	452
+ s	273		 so	453
+o	111		om	454
+mo	317		mos	455
+s 	359		s i	456
+i	105		ir	457
+r	114		rm	458
+m	109		mã	459
+ão	355		ãos	460
+s	115		s,	461
+, 	388		, n	462
+n	110		nó	463
+ós 	452		ós n	464
+n	110		no	465
+os	358		os 	466
+ se	329		 sen	467
+nt	350		nti	468
+im	332		imo	469
+os 	466		os p	470
+pa	401		par	471
+re	268		rec	472
+ci	280		cid	473
+dos	445		dos 	474
+ e 	389		 e i	475
+i	105		ig	476
+g	103		gu	477
+ua	322		uai	478
+i	105		is	479
+s	115		s;	480
+;	59		; 	481
+ n	378		 na	482
+as	385		as 	483
+ c	261		 ci	484
+i	105		id	485
+da	347		dad	486
+de	336		des	487
+s,	461		s, 	488
+ na	482		 nas	489
+s 	359		s a	490
+a	97		al	491
+l	108		ld	492
+de	336		dei	493
+ia	281		ias	494
+s, 	488		s, n	495
+no	465		nos	496
+s 	359		s p	497
+po	371		pov	498
+vo	357		voa	499
+ado	441		ados	500
+s, n	495		s, nã	501
+ão	355		ão 	502
+ p	400		 po	503
+or	372		orq	504
+que	408		que 	505
+ so	453		 sof	506
+f	102		fr	507
+ra	264		ram	508
+mos	455		mos,	509
+, 	388		, c	510
+c	99		co	511
+om	454		om 	512
