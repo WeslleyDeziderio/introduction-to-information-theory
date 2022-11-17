@@ -40,7 +40,7 @@ std::unordered_map<int, std::string> getDicDecode(std::uint16_t tamanho) {
  */
 void descomprimeArquivo(std::vector<int> arquivoComprimido) {
     std::ofstream myfile;
-    myfile.open ("./mensagem_decodificada.txt");
+    myfile.open ("./mensagem_decodificada.mp4");
 
     std::cout << "\nDescomprimindo arquivo..." << std::endl;
     auto start = std::chrono::high_resolution_clock::now();
@@ -53,7 +53,9 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
     std::string traducaoCaractereAnterior = "";
     traducaoCaractereAnterior += msgDecodificada[0];
 
+    std::string test = "";
     myfile << msgDecodificada;
+    test += msgDecodificada;
 
     for (long unsigned int i = 0; i < arquivoComprimido.size()-1; i++) {
         proximoCaractere = arquivoComprimido[i+1];
@@ -74,11 +76,13 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
         caractereAnterior = proximoCaractere;
 
         myfile << msgDecodificada;
-
+        test += msgDecodificada;
     }
-    
-    std::cout << "Arquivo descomprimido com sucesso!" << std::endl;
+
+
     myfile.close();
+
+    std::cout << "Arquivo descomprimido com sucesso!" << std::endl;
 
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);

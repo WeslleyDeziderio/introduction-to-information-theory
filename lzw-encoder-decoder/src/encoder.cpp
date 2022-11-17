@@ -68,40 +68,37 @@ std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
  * 
  */
 std::vector<int> comprimeArquivo() {
-    FILE *fp;
-    fp = fopen("corpus16MB.txt", "rb");
-
-    if (fp == NULL) {
-        std::cerr << "Erro abrindo o arquivo!" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
     int code = 256;
     std::unordered_map<std::string, int> dictionary = getDicCode(code);
-
-    char ch;
     std::vector<int> mensagemCodificada;
-    std::string caractereAnterior = "";
-    std::string caractereAtual = "";
+  
     // std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
 
     std::cout << "\nComprimindo o arquivo... " << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    ch = fgetc(fp);
-    caractereAnterior += ch;
-    std::vector<char> aux;
+    std::string caractereAnterior = "";
+    std::string caractereAtual = "";
     std::string seccion = "";
 
-    while (ch != EOF) {
-        aux.push_back(ch);
-        ch = fgetc(fp);
-    }
+    std::ifstream myfile("disco.mp4", std::ios_base::in | std::ios_base::binary);
+    myfile.seekg(0, myfile.end);
+    std::streampos length = myfile.tellg();
+    myfile.seekg(0, myfile.beg);
 
-    for(long unsigned int i = 0 ; i < aux.size() ; i++){
-        seccion += aux[i];
-    }
+    std::vector<unsigned char> discoBytes(length);
+
+    myfile.read((char *)&discoBytes[0],length);
+
+    myfile.close();
+
+    for(long unsigned int i = 0 ; i < discoBytes.size() ; i++){
+        seccion += discoBytes[i];
+    } 
+    
+    caractereAnterior = seccion[0];
+    std::ofstream dicionarioFile("dicionario.txt", std::ios_base::out | std::ios_base::binary);
 
     for (long unsigned int i = 0; i < (seccion.length()-1); i++){
         if (i != (seccion.length()-1)) {
@@ -109,7 +106,6 @@ std::vector<int> comprimeArquivo() {
         }
         std::string compare = caractereAnterior + caractereAtual;
         if (dictionary.find(compare) != dictionary.end()){
-
             caractereAnterior = caractereAnterior + caractereAtual;
         } else {
             // std::cout << caractereAnterior << "\t" << dictionary[caractereAnterior] << "\t\t"
@@ -125,6 +121,7 @@ std::vector<int> comprimeArquivo() {
         caractereAtual = "";
     }
 
+    dicionarioFile.close();
     mensagemCodificada.push_back(dictionary[caractereAnterior]);
 
     FILE *exit_file = fopen("mensagem_codificada.bin", "wb");
@@ -133,11 +130,10 @@ std::vector<int> comprimeArquivo() {
         fwrite(&mensagemCodificada[i], 1, 1,exit_file);
     }
 
-    fclose(exit_file);
     printf("\n");
     std::cout << "Arquivo comprimido com sucesso!" << std::endl;
 
-    fclose(fp);
+    fclose(exit_file);
 
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop-start);
