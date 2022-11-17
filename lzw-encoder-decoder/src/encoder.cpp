@@ -17,9 +17,8 @@ namespace globais {
     const tipoCodigo tamanhoMaxDic {std::numeric_limits<tipoCodigo>::max()}; // 2^16
 }
 
-//TODO organizar estrutura do código
 void Encoder::printHello() {
-    std::cout << "Hello world! \n" << std::endl;
+    std::cout << "Compressor e descompressor  Lempel-Ziv-Welch.\n" << std::endl;
     std::cout << "Tamanho máximo do dicionário: " << globais::tamanhoMaxDic << std::endl;
     std::cout << "Para valores cada vez maiores de 'k', o tempo de execução do programa irá aumentar!" << std::endl;
     std::cout << "Insira um valor para 'k' entre 9 e 16: ";
@@ -46,7 +45,6 @@ void Encoder::printHello() {
  * @param tamanho será o nosso 2^k
  * @return std::vector<char> 
  */
-
 std::unordered_map<std::string, int> getDicCode(std::uint16_t tamanho) {
     std::unordered_map<std::string, int> tabela;
 
@@ -72,8 +70,6 @@ std::vector<int> comprimeArquivo() {
     std::unordered_map<std::string, int> dictionary = getDicCode(code);
     std::vector<int> mensagemCodificada;
   
-    // std::cout << "Quantidade de caracteres no arquivo: " << fp << std::endl;
-
     std::cout << "\nComprimindo o arquivo... " << std::endl;
 
     auto start = std::chrono::high_resolution_clock::now();

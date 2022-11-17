@@ -53,9 +53,9 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
     std::string traducaoCaractereAnterior = "";
     traducaoCaractereAnterior += msgDecodificada[0];
 
-    std::string test = "";
+    std::string strArquivo = "";
     myfile << msgDecodificada;
-    test += msgDecodificada;
+    strArquivo += msgDecodificada;
 
     for (long unsigned int i = 0; i < arquivoComprimido.size()-1; i++) {
         proximoCaractere = arquivoComprimido[i+1];
@@ -76,7 +76,7 @@ void descomprimeArquivo(std::vector<int> arquivoComprimido) {
         caractereAnterior = proximoCaractere;
 
         myfile << msgDecodificada;
-        test += msgDecodificada;
+        strArquivo += msgDecodificada;
     }
 
 
