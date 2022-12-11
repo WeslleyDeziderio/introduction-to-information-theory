@@ -6,3 +6,5 @@
 <h3>Execution</h3>
 <p>For the LZW compressor/decompressor, in the root folder run the command: $ g++ -Wall main.cpp -o main && ./main</p>
 <p>Note: you can change the file to compress/decompress on the encoder.cpp/decoder.cpp files
+
+<p>For the KNN classifier, on the root folder run the command: $</p>
