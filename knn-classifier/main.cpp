@@ -7,12 +7,58 @@
 #include <chrono>
 
 #define CODE 256
+#define SEED 666
+#define RANGE 10
 
 class fileImg {
 public:
     std::vector<unsigned char> header;
     std::vector<unsigned char> data;
 };
+
+struct randomNumber{
+    std::vector<int> treinamento;
+    std::vector<int> teste; 
+}tRandom;
+
+randomNumber randomSelect(int range){
+
+    struct randomNumber select;
+    srand(SEED);
+
+    std::vector<int> sorteados;
+    int j = (rand() % range);
+    sorteados.push_back(j);
+
+    for (int i = 1; i < range ; i++){
+
+        while(true){
+            int flag = 0;
+            j = 1 + (rand() % (range));
+            for(long unsigned int k = 0; k < sorteados.size();k++){
+                if(sorteados[k] == j){
+                    break;
+                }
+                if(k == (sorteados.size()-1)){
+                    flag = 1;
+                }
+            }
+            if(flag == 1){
+                break;
+            }
+        }
+        sorteados.push_back(j);
+    }
+    for(long unsigned int i = 0; i < sorteados.size() ; i++){
+        if( i % 2 == 0){
+            select.teste.push_back(sorteados[i]);
+        }else{
+            select.treinamento.push_back(sorteados[i]);
+        }
+
+    }
+    return select;
+}
 
 long unsigned int tamanhoLimite;
 using tipoCodigo = std::uint16_t;
@@ -67,7 +113,10 @@ fileImg openFile(std::string fileName) {
 
 };
 
-void lzw_treino_unitario(std::unordered_map<std::string, int>dicionario, std::string fileName) {
+std::vector<std::unordered_map<std::string, int>> multDictionary;
+
+
+std::unordered_map<std::string, int> lzw_treino_unitario(std::unordered_map<std::string, int>dicionario, std::string fileName) {
     int code = CODE;
     std::vector<int> mensagemCodificada;
 
@@ -89,14 +138,14 @@ void lzw_treino_unitario(std::unordered_map<std::string, int>dicionario, std::st
             caractereAtual += seccion[i+1];
         }
         std::string compare = caractereAnterior + caractereAtual;
-        if (globalDictionary.find(compare) != globalDictionary.end()){
+        if (dicionario.find(compare) != dicionario.end()){
             caractereAnterior = caractereAnterior + caractereAtual;
         } else {
-            mensagemCodificada.push_back(globalDictionary[caractereAnterior]);
-            if (globalDictionary.size() <= tamanhoLimite){
+            mensagemCodificada.push_back(dicionario[caractereAnterior]);
+            if (dicionario.size() <= tamanhoLimite){
                 // dicionarioFile << caractereAnterior << "\t" << globalDictionary[caractereAnterior] << "\t\t"
                 // << compare << "\t" << code << "\n";
-                globalDictionary[compare] = code;
+                dicionario[compare] = code;
                 code++;
             }
             caractereAnterior = caractereAtual;
@@ -106,10 +155,28 @@ void lzw_treino_unitario(std::unordered_map<std::string, int>dicionario, std::st
     }
 
     // dicionarioFile.close();
-    mensagemCodificada.push_back(globalDictionary[caractereAnterior]);
+    mensagemCodificada.push_back(dicionario[caractereAnterior]);
+
+    return dicionario;
 
 }
 
+void filaDeTreinamento() { 
+    struct randomNumber selection;
+    selection = randomSelect(RANGE);
+
+    for(int i = 1 ; i < 41 ; i++){
+        std::unordered_map<std::string, int> tempDictionary = getDicCode(CODE);
+
+        for(int j = 1 ; j < 6 ; j++){
+            std::string filePath = "faces/";
+            filePath = filePath + "s" + std::to_string(i) + "/" + std::to_string(selection.treinamento[j-1]) + ".pgm";
+            tempDictionary = lzw_treino_unitario(tempDictionary, filePath);
+
+        }
+        multDictionary.push_back(tempDictionary);
+    }
+}
 
 /**
  * @brief 
@@ -146,17 +213,17 @@ void lzw_treino_unitario(std::unordered_map<std::string, int>dicionario, std::st
         if (i != (secao.length()-1)) {
             caractereAtual += secao[i+1];
         }
-        if (globalDictionary.find(compare) != globalDictionary.end()) {
+        if (dicionario.find(compare) != dicionario.end()) {
             caractereAnterior = caractereAnterior + caractereAtual;
         } else {
-            mensagemCodificada.push_back(globalDictionary[caractereAnterior]);
+            mensagemCodificada.push_back(dicionario[caractereAnterior]);
             caractereAnterior = file.data[i];
         }
 
     }
 
-    if (globalDictionary.find(compare) == globalDictionary.end()) {
-        mensagemCodificada.push_back(globalDictionary[caractereAnterior]);
+    if (dicionario.find(compare) == dicionario.end()) {
+        mensagemCodificada.push_back(dicionario[caractereAnterior]);
     }
 
     return mensagemCodificada.size();
