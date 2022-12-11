@@ -5,7 +5,7 @@
 [![](https://img.shields.io/badge/C++-cyan.svg)](https://en.cppreference.com/w/cpp/11)
 
 <h3>This repository contains the projects made in the Introcution to Information Theory classes.</h3> <br>
-<p> Here you will find two projects: LZW-compressor made in C++ and a KNN Classifier.</p>
+<p> Here you will find two projects: LZW-compressor and a KNN Classifier, both made in C++.</p>
 
 <h3>Execution</h3>
 
