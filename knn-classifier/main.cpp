@@ -222,7 +222,7 @@ void filaDeTreinamento() {
 
     }
 
-    if (dicionario.find(compare) == dicionario.end()) {
+    if (dicionario.find(compare) != dicionario.end()) {
         mensagemCodificada.push_back(dicionario[caractereAnterior]);
     }
 
