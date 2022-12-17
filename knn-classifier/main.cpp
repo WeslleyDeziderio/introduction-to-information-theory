@@ -219,7 +219,6 @@ void lzw_treino(dataSelection paths) {
 
 //Função que retorna o tamanho da imagem comprimida
  int TestaLzw(std::unordered_map<std::string, int> dicionario, std::string amostraTeste) {
-
     std::vector<int> mensagemCodificada;
     std::string caractereAnterior = "";
     std::string caractereAtual = "";
@@ -257,7 +256,7 @@ void lzw_treino(dataSelection paths) {
 
 //Função que recebe o vector de dicionarios e o arquivo para o teste,
 //retorna em quais dicionarios o arquivo tem maior compressão( supondo que é possivel ter a mesma taxa de compressão)
-std::vector<int> knn_predict(std::vector<std::unordered_map<std::string, int>> train_data, std::string test_data){
+std::vector<int> predicao(std::vector<std::unordered_map<std::string, int>> train_data, std::string test_data){
 
     std::vector<int> size_testing;
 
@@ -292,7 +291,7 @@ int main(){
     std::vector<std::vector<int>> predictions;
     for(long unsigned int i = 0; i < paths.x_test.size() ; i++){
         printf("%ld\n",i);
-        predictions.push_back(knn_predict(multDictionary,paths.x_test[i]));
+        predictions.push_back(predicao(multDictionary,paths.x_test[i]));
     }
 
     //print testes
