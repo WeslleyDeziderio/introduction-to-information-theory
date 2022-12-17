@@ -147,16 +147,6 @@ fileImg openFile(std::string fileName){
     }
     img.data.erase(img.data.begin(),img.data.begin()+j);
 
-    // std::string temp = "";
-    // for (unsigned long int i = 0; i < img.data.size();i++) {
-    //     temp += img.data[i];
-    // } 
-    // std::string temp2;
-    // temp2 = UTF8toISO8859_1(temp.c_str());
-    // for (unsigned long int i = 0; i < img.data.size();i++) {
-    //     img.data[i] = temp2[i];
-    // } 
-
     myfile.close();
     return img;
 
